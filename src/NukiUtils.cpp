@@ -1,5 +1,4 @@
 #include "NukiUtils.h"
-
 #include "sodium/crypto_secretbox.h"
 #include "Crc16.h"
 

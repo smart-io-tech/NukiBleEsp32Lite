@@ -51,16 +51,6 @@ Logging can be enabled by setting the following defines (these are also availabl
           updateConnectionState();
         }
 
-## Nuki opener
-
-The setup for the opener is very much the same as for the lock, except you create a NukiOpener object instead of a NukiLock object.
-Most functionality is shared between lock and opener, except for device-specific functionality.
-
-For example:
-- The lock action for the opener is different (e. g. ElectricStrikeActuation or activateRTO instead of unlock)
-- The reported state is different (e. g. unlocked vs RTOactive)
-- Config entries are different (e.g. The opener supports sounds, the lock doesn't)
-
 ## BT processes
 - The ESP establishes a new BT connection every time a command is sent, when no data is sent anymore the lock times out the connection.
 - Scanning goes on continuously on the ESP with intervals chosen (in the BLE scanner) in such a way that it will never miss an advertisement sent from the lock.
