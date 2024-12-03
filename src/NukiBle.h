@@ -101,54 +101,6 @@ class NukiBle : public BLEClientCallbacks, public BleScanner::Subscriber {
     uint16_t getLogEntryCount();
 
     /**
-     * @brief Send a new keypad entry to the lock via BLE
-     *
-     * @param newKeypadEntry Nuki api based datatype to be sent
-     * Keypad Codes that start with 12 are not allowed
-     * 0 is not allowed
-     * Duplicates are not allowed
-     */
-    Nuki::CmdResult addKeypadEntry(NewKeypadEntry newKeypadEntry);
-
-    /**
-     * @brief Send an updated keypad entry to the lock via BLE
-     *
-     * @param updatedKeypadEntry Nuki api based datatype to be sent
-     * Keypad Codes that start with 12 are not allowed
-     * 0 is not allowed
-     * Duplicates are not allowed
-     */
-    Nuki::CmdResult updateKeypadEntry(UpdatedKeypadEntry updatedKeyPadEntry);
-
-    /**
-    * @brief Returns the keypad entry count.
-    * Only available after executing retreiveKeypadEntries.
-    */
-    uint16_t getKeypadEntryCount();
-
-    /**
-     * @brief Request the lock via BLE to send the existing keypad entries
-     *
-     * @param offset The start offset to be read.
-     * @param count The number of entries to be read, starting at the specified offset.
-     */
-    Nuki::CmdResult retrieveKeypadEntries(const uint16_t offset, const uint16_t count);
-
-    /**
-     * @brief Get the Keypad Entries stored on the esp (after executing retreieveLogKeypadEntries)
-     *
-     * @param requestedKeyPadEntries list to store the returned Keypad entries
-     */
-    void getKeypadEntries(std::list<KeypadEntry>* requestedKeyPadEntries);
-
-    /**
-    * @brief Delete a Keypad Entry
-    *
-    * @param id Id to be deleted
-    */
-    CmdResult deleteKeypadEntry(uint16_t id);
-
-    /**
      * @brief Request the lock via BLE to send the existing authorizationentries
      *
      * @param offset The start offset to be read.
@@ -378,14 +330,10 @@ class NukiBle : public BLEClientCallbacks, public BleScanner::Subscriber {
 
     unsigned char sentNonce[crypto_secretbox_NONCEBYTES] = {};
 
-    uint16_t nrOfKeypadCodes = 0;
-    uint8_t nrOfReceivedKeypadCodes = 0;
-    bool keypadCodeCountReceived = false;
     uint16_t logEntryCount = 0;
     bool loggingEnabled = false;
     int rssi = 0;
     unsigned long lastReceivedBeaconTs = 0;
-    std::list<KeypadEntry> listOfKeyPadEntries;
     std::list<AuthorizationEntry> listOfAuthorizationEntries;
     AuthorizationIdType authorizationIdType = AuthorizationIdType::Bridge;
 

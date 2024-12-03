@@ -37,21 +37,6 @@ Nuki::CmdResult NukiLock::lockAction(const LockAction lockAction, const uint32_t
   return executeAction(action);
 }
 
-Nuki::CmdResult NukiLock::keypadAction(KeypadActionSource source, uint32_t code, KeypadAction keypadAction) {
-  Action action;
-  unsigned char payload[6] = {(unsigned char)source};
-  memcpy(&payload[1], &code, sizeof(code));
-  memcpy(&payload[1+sizeof(code)], &keypadAction, sizeof(KeypadAction));
-  uint8_t payloadLen = 6;
-
-  action.cmdType = Nuki::CommandType::CommandWithChallengeAndAccept;
-  action.command = Command::KeypadAction;
-  memcpy(action.payload, &payload, payloadLen);
-  action.payloadLen = payloadLen;
-
-  return executeAction(action);
-}
-
 Nuki::CmdResult NukiLock::requestKeyTurnerState(KeyTurnerState* retrievedKeyTurnerState) {
   Action action;
   uint16_t payload = (uint16_t)Command::KeyturnerStates;
@@ -651,13 +636,6 @@ Nuki::CmdResult NukiLock::deleteAuthorizationEntry(uint32_t id) {
 
 bool NukiLock::isBatteryCritical() {
   return ((keyTurnerState.criticalBatteryState & (1 << 0)) != 0);
-}
-
-bool NukiLock::isKeypadBatteryCritical() {
-  if ((keyTurnerState.accessoryBatteryState & (1 << 7)) != 0) {
-    return ((keyTurnerState.accessoryBatteryState & (1 << 6)) != 0);
-  }
-  return false;
 }
 
 bool NukiLock::isBatteryCharging() {

@@ -182,7 +182,6 @@ void logConfig(Config config) {
   log_d("fobAction3 :%d", config.fobAction3);
   log_d("singleLock :%d", config.singleLock);
   log_d("advertisingMode :%d", config.advertisingMode);
-  log_d("hasKeypad :%d", config.hasKeypad);
   log_d("firmwareVersion :%d.%d.%d", config.firmwareVersion[0], config.firmwareVersion[1], config.firmwareVersion[2]);
   log_d("hardwareRevision :%d.%d", config.hardwareRevision[0], config.hardwareRevision[1]);
   log_d("homeKitStatus :%d", config.homeKitStatus);
@@ -208,98 +207,6 @@ void logNewConfig(NewConfig newConfig) {
   log_d("singleLock :%d", newConfig.singleLock);
   log_d("advertisingMode :%d", newConfig.advertisingMode);
   log_d("timeZoneId :%d", newConfig.timeZoneId);
-  #endif
-}
-
-void logNewKeypadEntry(NewKeypadEntry newKeypadEntry) {
-  #ifdef DEBUG_NUKI_READABLE_DATA
-  log_d("code:%d", newKeypadEntry.code);
-  log_d("name:%s", newKeypadEntry.name);
-  log_d("timeLimited:%d", newKeypadEntry.timeLimited);
-  log_d("allowedFromYear:%d", newKeypadEntry.allowedFromYear);
-  log_d("allowedFromMonth:%d", newKeypadEntry.allowedFromMonth);
-  log_d("allowedFromDay:%d", newKeypadEntry.allowedFromDay);
-  log_d("allowedFromHour:%d", newKeypadEntry.allowedFromHour);
-  log_d("allowedFromMin:%d", newKeypadEntry.allowedFromMin);
-  log_d("allowedFromSec:%d", newKeypadEntry.allowedFromSec);
-  log_d("allowedUntilYear:%d", newKeypadEntry.allowedUntilYear);
-  log_d("allowedUntilMonth:%d", newKeypadEntry.allowedUntilMonth);
-  log_d("allowedUntilDay:%d", newKeypadEntry.allowedUntilDay);
-  log_d("allowedUntilHour:%d", newKeypadEntry.allowedUntilHour);
-  log_d("allowedUntilMin:%d", newKeypadEntry.allowedUntilMin);
-  log_d("allowedUntilSec:%d", newKeypadEntry.allowedUntilSec);
-  log_d("allowedWeekdays:%d", newKeypadEntry.allowedWeekdays);
-  log_d("allowedFromTimeHour:%d", newKeypadEntry.allowedFromTimeHour);
-  log_d("allowedFromTimeMin:%d", newKeypadEntry.allowedFromTimeMin);
-  log_d("allowedUntilTimeHour:%d", newKeypadEntry.allowedUntilTimeHour);
-  log_d("allowedUntilTimeMin:%d", newKeypadEntry.allowedUntilTimeMin);
-  #endif
-}
-
-void logKeypadEntry(KeypadEntry keypadEntry) {
-  #ifdef DEBUG_NUKI_READABLE_DATA
-  log_d("codeId:%d", keypadEntry.codeId);
-  log_d("code:%d", keypadEntry.code);
-  log_d("name:%s", keypadEntry.name);
-  log_d("enabled:%d", keypadEntry.enabled);
-  log_d("dateCreatedYear:%d", keypadEntry.dateCreatedYear);
-  log_d("dateCreatedMonth:%d", keypadEntry.dateCreatedMonth);
-  log_d("dateCreatedDay:%d", keypadEntry.dateCreatedDay);
-  log_d("dateCreatedHour:%d", keypadEntry.dateCreatedHour);
-  log_d("dateCreatedMin:%d", keypadEntry.dateCreatedMin);
-  log_d("dateCreatedSec:%d", keypadEntry.dateCreatedSec);
-  log_d("dateLastActiveYear:%d", keypadEntry.dateLastActiveYear);
-  log_d("dateLastActiveMonth:%d", keypadEntry.dateLastActiveMonth);
-  log_d("dateLastActiveDay:%d", keypadEntry.dateLastActiveDay);
-  log_d("dateLastActiveHour:%d", keypadEntry.dateLastActiveHour);
-  log_d("dateLastActiveMin:%d", keypadEntry.dateLastActiveMin);
-  log_d("dateLastActiveSec:%d", keypadEntry.dateLastActiveSec);
-  log_d("lockCount:%d", keypadEntry.lockCount);
-  log_d("timeLimited:%d", keypadEntry.timeLimited);
-  log_d("allowedFromYear:%d", keypadEntry.allowedFromYear);
-  log_d("allowedFromMonth:%d", keypadEntry.allowedFromMonth);
-  log_d("allowedFromDay:%d", keypadEntry.allowedFromDay);
-  log_d("allowedFromHour:%d", keypadEntry.allowedFromHour);
-  log_d("allowedFromMin:%d", keypadEntry.allowedFromMin);
-  log_d("allowedFromSec:%d", keypadEntry.allowedFromSec);
-  log_d("allowedUntilYear:%d", keypadEntry.allowedUntilYear);
-  log_d("allowedUntilMonth:%d", keypadEntry.allowedUntilMonth);
-  log_d("allowedUntilDay:%d", keypadEntry.allowedUntilDay);
-  log_d("allowedUntilHour:%d", keypadEntry.allowedUntilHour);
-  log_d("allowedUntilMin:%d", keypadEntry.allowedUntilMin);
-  log_d("allowedUntilSec:%d", keypadEntry.allowedUntilSec);
-  log_d("allowedWeekdays:%d", keypadEntry.allowedWeekdays);
-  log_d("allowedFromTimeHour:%d", keypadEntry.allowedFromTimeHour);
-  log_d("allowedFromTimeMin:%d", keypadEntry.allowedFromTimeMin);
-  log_d("allowedUntilTimeHour:%d", keypadEntry.allowedUntilTimeHour);
-  log_d("allowedUntilTimeMin:%d", keypadEntry.allowedUntilTimeMin);
-  #endif
-}
-
-void logUpdatedKeypadEntry(UpdatedKeypadEntry updatedKeypadEntry) {
-  #ifdef DEBUG_NUKI_READABLE_DATA
-  log_d("codeId:%d", updatedKeypadEntry.codeId);
-  log_d("code:%d", updatedKeypadEntry.code);
-  log_d("name:%s", updatedKeypadEntry.name);
-  log_d("enabled:%d", updatedKeypadEntry.enabled);
-  log_d("timeLimited:%d", updatedKeypadEntry.timeLimited);
-  log_d("allowedFromYear:%d", updatedKeypadEntry.allowedFromYear);
-  log_d("allowedFromMonth:%d", updatedKeypadEntry.allowedFromMonth);
-  log_d("allowedFromDay:%d", updatedKeypadEntry.allowedFromDay);
-  log_d("allowedFromHour:%d", updatedKeypadEntry.allowedFromHour);
-  log_d("allowedFromMin:%d", updatedKeypadEntry.allowedFromMin);
-  log_d("allowedFromSec:%d", updatedKeypadEntry.allowedFromSec);
-  log_d("allowedUntilYear:%d", updatedKeypadEntry.allowedUntilYear);
-  log_d("allowedUntilMonth:%d", updatedKeypadEntry.allowedUntilMonth);
-  log_d("allowedUntilDay:%d", updatedKeypadEntry.allowedUntilDay);
-  log_d("allowedUntilHour:%d", updatedKeypadEntry.allowedUntilHour);
-  log_d("allowedUntilMin:%d", updatedKeypadEntry.allowedUntilMin);
-  log_d("allowedUntilSec:%d", updatedKeypadEntry.allowedUntilSec);
-  log_d("allowedWeekdays:%d", updatedKeypadEntry.allowedWeekdays);
-  log_d("allowedFromTimeHour:%d", updatedKeypadEntry.allowedFromTimeHour);
-  log_d("allowedFromTimeMin:%d", updatedKeypadEntry.allowedFromTimeMin);
-  log_d("allowedUntilTimeHour:%d", updatedKeypadEntry.allowedUntilTimeHour);
-  log_d("allowedUntilTimeMin:%d", updatedKeypadEntry.allowedUntilTimeMin);
   #endif
 }
 
@@ -534,8 +441,6 @@ void logKeyturnerState(KeyTurnerState keyTurnerState) {
   logCompletionStatus(keyTurnerState.lastLockActionCompletionStatus);
   log_d("doorSensorState: %d", keyTurnerState.doorSensorState);
   log_d("nightModeActive: %d", keyTurnerState.nightModeActive);
-  log_d("Keypad bat critical feature supported: %d", keyTurnerState.accessoryBatteryState & 1);
-  log_d("Keypad Battery Critical: %d", keyTurnerState.accessoryBatteryState & 2);
   #endif
 }
 
@@ -569,31 +474,6 @@ void logLogEntry(LogEntry logEntry) {
       logNukiTrigger((Trigger)logEntry.data[1]);
       log_d("Flags: %d", logEntry.data[2]);
       logCompletionStatus((CompletionStatus)logEntry.data[3]);
-      break;
-    }
-    case LoggingType::KeypadAction: {
-      logLockAction((LockAction)logEntry.data[0]);
-      log_d("Source: %d", logEntry.data[1]);
-      logCompletionStatus((CompletionStatus)logEntry.data[2]);
-      uint16_t codeId = 0;
-      memcpy(&codeId, &logEntry.data[3], 2);
-      log_d("Code id: %d", codeId);
-      break;
-    }
-    case LoggingType::DoorSensor: {
-      if (logEntry.data[0] == 0x00) {
-        log_d("Door opened") ;
-      }
-      if (logEntry.data[0] == 0x01) {
-        log_d("Door closed") ;
-      }
-      if (logEntry.data[0] == 0x02) {
-        log_d("Door sensor jammed") ;
-      }
-      break;
-    }
-    case LoggingType::DoorSensorLoggingEnabled: {
-      log_d("Logging enabled: %d", logEntry.data[0]);
       break;
     }
     default:

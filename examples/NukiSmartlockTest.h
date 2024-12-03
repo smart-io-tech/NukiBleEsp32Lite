@@ -16,36 +16,9 @@ BleScanner::Scanner scanner;
 NukiLock::KeyTurnerState retrievedKeyTurnerState;
 NukiLock::BatteryReport _batteryReport;
 std::list<NukiLock::LogEntry> requestedLogEntries;
-std::list<Nuki::KeypadEntry> requestedKeypadEntries;
 std::list<Nuki::AuthorizationEntry> requestedAuthorizationEntries;
 std::list<NukiLock::TimeControlEntry> requestedTimeControlEntries;
 
-void addKeypadEntry() {
-  Nuki::NewKeypadEntry newKeypadEntry;
-  unsigned char nameBuff[20] = "test";
-
-  newKeypadEntry.code = 111111;
-  memcpy(newKeypadEntry.name, nameBuff, 20);
-  newKeypadEntry.timeLimited = 1;
-  newKeypadEntry.allowedFromYear = 2022;
-  newKeypadEntry.allowedFromMonth = 2;
-  newKeypadEntry.allowedFromDay = 1;
-  newKeypadEntry.allowedFromHour = 0;
-  newKeypadEntry.allowedFromMin = 0;
-  newKeypadEntry.allowedFromSec = 0;
-  newKeypadEntry.allowedUntilYear = 2023;
-  newKeypadEntry.allowedUntilMonth = 1;
-  newKeypadEntry.allowedUntilDay = 1;
-  newKeypadEntry.allowedUntilHour = 0;
-  newKeypadEntry.allowedUntilMin = 0;
-  newKeypadEntry.allowedUntilSec = 0;
-  newKeypadEntry.allowedFromTimeHour = 0;
-  newKeypadEntry.allowedFromTimeMin = 0;
-  newKeypadEntry.allowedUntilTimeHour = 23;
-  newKeypadEntry.allowedUntilTimeMin = 59;
-
-  nukiLock.addKeypadEntry(newKeypadEntry);
-}
 
 void batteryReport() {
   uint8_t result = nukiLock.requestBatteryReport(&_batteryReport);
@@ -80,21 +53,6 @@ void requestLogEntries() {
     }
   } else {
     log_d("get log failed: %d", result);
-  }
-}
-
-void requestKeyPadEntries() {
-  uint8_t result = nukiLock.retrieveKeypadEntries(0, 10);
-  if (result == 1) {
-    delay(5000);
-    nukiLock.getKeypadEntries(&requestedKeypadEntries);
-    std::list<Nuki::KeypadEntry>::iterator it = requestedKeypadEntries.begin();
-    while (it != requestedKeypadEntries.end()) {
-      log_d("Keypad entry[%d] %d", it->codeId, it->code);
-      it++;
-    }
-  } else {
-    log_d("get keypadentries failed: %d", result);
   }
 }
 

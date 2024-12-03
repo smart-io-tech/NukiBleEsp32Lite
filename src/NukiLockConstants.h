@@ -117,18 +117,6 @@ enum class LockAction : uint8_t {
   FobAction3      = 0x83
 };
 
-enum class KeypadActionSource : uint8_t {
-  ArrowKey = 0x00,
-  Code = 0x01
-};
-
-enum class KeypadAction : uint8_t {
-  Intelligent     = 0x00,
-  Unlock          = 0x01,
-  Lock            = 0x02,
-  Unlatch         = 0x03,
-  LockNgo         = 0x04
-};
 
 enum class ButtonPressAction : uint8_t {
   NoAction          = 0x00,
@@ -173,7 +161,6 @@ struct __attribute__((packed)) KeyTurnerState {
   LockAction lastLockAction;
   Trigger lastLockActionTrigger;
   CompletionStatus lastLockActionCompletionStatus;
-  DoorSensorState doorSensorState = DoorSensorState::Unavailable;
   uint16_t nightModeActive;
   uint8_t accessoryBatteryState;
 };
@@ -202,14 +189,12 @@ struct __attribute__((packed)) Config {
   uint8_t  fobAction3;
   uint8_t  singleLock;
   AdvertisingMode advertisingMode;
-  uint8_t hasKeypad;
   unsigned char firmwareVersion[3];
   unsigned char hardwareRevision[2];
   uint8_t homeKitStatus;
   TimeZoneId timeZoneId;
   uint8_t undocumented1;
   uint8_t undocumented2;
-  uint8_t hasKeypadV2;
 };
 
 struct __attribute__((packed)) NewConfig {
@@ -317,9 +302,6 @@ enum class LoggingType : uint8_t {
   LockAction                = 0x02,
   Calibration               = 0x03,
   InitializationRun         = 0x04,
-  KeypadAction              = 0x05,
-  DoorSensor                = 0x06,
-  DoorSensorLoggingEnabled  = 0x07
 };
 
 struct __attribute__((packed)) LogEntry {
@@ -483,32 +465,6 @@ inline void completionStatusToString(const CompletionStatus status, char* str) {
   }
 }
 
-inline void doorSensorStateToString(const DoorSensorState state, char* str) {
-  switch (state) {
-    case DoorSensorState::Unavailable:
-      strcpy(str, "unavailable");
-      break;
-    case DoorSensorState::Deactivated:
-      strcpy(str, "deactivated");
-      break;
-    case DoorSensorState::DoorClosed:
-      strcpy(str, "doorClosed");
-      break;
-    case DoorSensorState::DoorOpened:
-      strcpy(str, "doorOpened");
-      break;
-    case DoorSensorState::DoorStateUnknown:
-      strcpy(str, "doorStateUnknown");
-      break;
-    case DoorSensorState::Calibrating:
-      strcpy(str, "calibrating");
-      break;
-    default:
-      strcpy(str, "undefined");
-      break;
-  }
-}
-
 inline void loggingTypeToString(const LoggingType state, char* str) {
   switch (state) {
     case LoggingType::LoggingEnabled:
@@ -522,15 +478,6 @@ inline void loggingTypeToString(const LoggingType state, char* str) {
       break;
     case LoggingType::InitializationRun:
       strcpy(str, "InitializationRun");
-      break;
-    case LoggingType::KeypadAction:
-      strcpy(str, "KeypadAction");
-      break;
-    case LoggingType::DoorSensor:
-      strcpy(str, "DoorSensor");
-      break;
-    case LoggingType::DoorSensorLoggingEnabled:
-      strcpy(str, "DoorSensorLoggingEnabled");
       break;
     default:
       strcpy(str, "Unknown");

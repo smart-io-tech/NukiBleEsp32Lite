@@ -15,7 +15,7 @@ class NukiLock : public Nuki::NukiBle {
      * @brief Sends lock action cmd via BLE to the lock
      *
      * @param lockAction
-     * @param nukiAppId 0 = App, 1 = Bridge, 2 = Fob, 3 = Keypad
+     * @param nukiAppId 0 = App, 1 = Bridge, 2 = Fob
      * @param flags optional
      * @param nameSuffix optional
      * @param nameSuffixLen len of nameSuffix if used ('\0' included, maximum 19)
@@ -23,14 +23,6 @@ class NukiLock : public Nuki::NukiBle {
      */
     Nuki::CmdResult lockAction(const LockAction lockAction, const uint32_t nukiAppId = 1, const uint8_t flags = 0,
                                const char* nameSuffix = nullptr, const uint8_t nameSuffixLen = 0);
-
-    /**
-     * @brief Send a keypad action entry to the lock via BLE
-     * @param source 0x00 = arrow key, 0x01 = code
-     * @param code The code that has been entered on the keypad
-     * @param keypadAction The action to be executed
-     */
-    Nuki::CmdResult keypadAction(KeypadActionSource source, uint32_t code, KeypadAction keypadAction);
 
     /**
      * @brief Requests keyturner state from Lock via BLE
@@ -451,15 +443,7 @@ class NukiLock : public Nuki::NukiBle {
      */
     bool isBatteryCritical();
 
-    /**
-     * @brief Returns keypad battery critical state in case this is supported
-     *
-     * Note that `retrieveOpenerState()` needs to be called first to retrieve the needed data
-     *
-     * @return true if critical
-     */
-    bool isKeypadBatteryCritical();
-
+  
     /**
      * @brief Returns battery charging state parsed from the battery state byte (battery critical byte)
      *

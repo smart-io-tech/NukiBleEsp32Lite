@@ -21,15 +21,6 @@ const char SECURITY_PINCODE_STORE_NAME[]  = "securityPinCode";
 const char SECRET_KEY_STORE_NAME[]        = "secretKeyK";
 const char AUTH_ID_STORE_NAME[]           = "authorizationId";
 
-enum class DoorSensorState : uint8_t {
-  Unavailable       = 0x00,
-  Deactivated       = 0x01,
-  DoorClosed        = 0x02,
-  DoorOpened        = 0x03,
-  DoorStateUnknown  = 0x04,
-  Calibrating       = 0x05
-};
-
 enum class BatteryType : uint8_t {
   Alkali            = 0x00,
   Accumulators      = 0x01,
@@ -102,14 +93,6 @@ enum class Command : uint16_t {
   TimeControlEntryCount	        = 0x003D,
   TimeControlEntry	            = 0x003E,
   UpdateTimeControlEntry	      = 0x003F,
-  AddKeypadCode	                = 0x0041,
-  KeypadCodeId	                = 0x0042,
-  RequestKeypadCodes	          = 0x0043,
-  KeypadCodeCount	              = 0x0044,
-  KeypadCode	                  = 0x0045,
-  UpdateKeypadCode	            = 0x0046,
-  RemoveKeypadCode	            = 0x0047,
-  KeypadAction	                = 0x0048,
   ContinuousModeAction     	     = 0x0057, // Opener only
   SimpleLockAction	            = 0x0100
 };
@@ -117,8 +100,7 @@ enum class Command : uint16_t {
 enum class AuthorizationIdType : uint8_t {
   App = 0,
   Bridge = 1,
-  Fob = 2,
-  Keypad = 3
+  Fob = 2
 };
 
 enum class TimeZoneId : uint16_t {
@@ -169,100 +151,6 @@ enum class TimeZoneId : uint16_t {
   Pacific_Honolulu = 44,  // UTC-10 H(A)ST dst: no
   Pacific_Pago_Pago = 45,  // UTC-11 SST dst: no
   None = 65535,  //
-};
-
-
-struct __attribute__((packed)) NewKeypadEntry {
-  uint32_t code;  //needs to be 6 digits
-  uint8_t name[20];
-  uint8_t timeLimited;
-  uint16_t allowedFromYear;
-  uint8_t allowedFromMonth;
-  uint8_t allowedFromDay;
-  uint8_t allowedFromHour;
-  uint8_t allowedFromMin;
-  uint8_t allowedFromSec;
-  uint16_t allowedUntilYear;
-  uint8_t allowedUntilMonth;
-  uint8_t allowedUntilDay;
-  uint8_t allowedUntilHour;
-  uint8_t allowedUntilMin;
-  uint8_t allowedUntilSec;
-  // bit 7  6  5  4  3  2  1  0
-  //     -  M  T  W  T  F  S  S
-  uint8_t allowedWeekdays;
-  uint8_t allowedFromTimeHour;
-  uint8_t allowedFromTimeMin;
-  uint8_t allowedUntilTimeHour;
-  uint8_t allowedUntilTimeMin;
-};
-
-struct __attribute__((packed)) KeypadEntry {
-  uint16_t codeId;
-  uint32_t code;
-  uint8_t name[20];
-  uint8_t enabled;
-  uint16_t dateCreatedYear;
-  uint8_t dateCreatedMonth;
-  uint8_t dateCreatedDay;
-  uint8_t dateCreatedHour;
-  uint8_t dateCreatedMin;
-  uint8_t dateCreatedSec;
-  uint16_t dateLastActiveYear;
-  uint8_t dateLastActiveMonth;
-  uint8_t dateLastActiveDay;
-  uint8_t dateLastActiveHour;
-  uint8_t dateLastActiveMin;
-  uint8_t dateLastActiveSec;
-  uint16_t lockCount;
-  uint8_t timeLimited;
-  uint16_t allowedFromYear;
-  uint8_t allowedFromMonth;
-  uint8_t allowedFromDay;
-  uint8_t allowedFromHour;
-  uint8_t allowedFromMin;
-  uint8_t allowedFromSec;
-  uint16_t allowedUntilYear;
-  uint8_t allowedUntilMonth;
-  uint8_t allowedUntilDay;
-  uint8_t allowedUntilHour;
-  uint8_t allowedUntilMin;
-  uint8_t allowedUntilSec;
-
-  // bit 7  6  5  4  3  2  1  0
-  //     -  M  T  W  T  F  S  S
-  uint8_t allowedWeekdays;
-  uint8_t allowedFromTimeHour;
-  uint8_t allowedFromTimeMin;
-  uint8_t allowedUntilTimeHour;
-  uint8_t allowedUntilTimeMin;
-};
-
-struct __attribute__((packed)) UpdatedKeypadEntry {
-  uint16_t codeId;
-  uint32_t code;
-  uint8_t name[20];
-  uint8_t enabled;
-  uint8_t timeLimited;
-  uint16_t allowedFromYear;
-  uint8_t allowedFromMonth;
-  uint8_t allowedFromDay;
-  uint8_t allowedFromHour;
-  uint8_t allowedFromMin;
-  uint8_t allowedFromSec;
-  uint16_t allowedUntilYear;
-  uint8_t allowedUntilMonth;
-  uint8_t allowedUntilDay;
-  uint8_t allowedUntilHour;
-  uint8_t allowedUntilMin;
-  uint8_t allowedUntilSec;
-  // bit 7  6  5  4  3  2  1  0
-  //     -  M  T  W  T  F  S  S
-  uint8_t allowedWeekdays;
-  uint8_t allowedFromTimeHour;
-  uint8_t allowedFromTimeMin;
-  uint8_t allowedUntilTimeHour;
-  uint8_t allowedUntilTimeMin;
 };
 
 struct __attribute__((packed)) AuthorizationEntry {
